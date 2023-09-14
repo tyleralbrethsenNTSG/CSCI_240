@@ -11,15 +11,18 @@ Board Members
 •	Position
 •	Onboard Date
 •	Term End Date
+
 Committees
 •	Name
 •	Chair
 •	Vice Chair
 •	Members 
+
 External Committee Members
 •	ID
 •	First Name
 •	Last Name
+
 Programs
 •	Name
 •	Type (Tournament/League/Clinic)
