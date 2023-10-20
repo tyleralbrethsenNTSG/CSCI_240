@@ -34,6 +34,20 @@ CREATE TABLE `BoardMember` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `Committee`
+--
+
+DROP TABLE IF EXISTS `Committee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Committee` (
+  `CommitteeID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`CommitteeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `ContactInfo`
 --
 
@@ -52,6 +66,21 @@ CREATE TABLE `ContactInfo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `ExternalMember`
+--
+
+DROP TABLE IF EXISTS `ExternalMember`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ExternalMember` (
+  `PersonID` int NOT NULL,
+  `OnboardYear` int NOT NULL,
+  PRIMARY KEY (`PersonID`,`OnboardYear`),
+  CONSTRAINT `ExternalMember_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Person`
 --
 
@@ -64,7 +93,45 @@ CREATE TABLE `Person` (
   `LastName` varchar(30) DEFAULT NULL,
   `USAU_Number` int DEFAULT NULL,
   PRIMARY KEY (`PersonID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `PersonCommittee`
+--
+
+DROP TABLE IF EXISTS `PersonCommittee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PersonCommittee` (
+  `PersonID` int NOT NULL,
+  `CommitteeID` int NOT NULL,
+  `CommitteePosition` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`PersonID`,`CommitteeID`),
+  KEY `CommitteeID` (`CommitteeID`),
+  CONSTRAINT `PersonCommittee_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `PersonCommittee_ibfk_2` FOREIGN KEY (`CommitteeID`) REFERENCES `Committee` (`CommitteeID`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Program`
+--
+
+DROP TABLE IF EXISTS `Program`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Program` (
+  `ProgramID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(30) DEFAULT NULL,
+  `GoverningCommittee` int NOT NULL,
+  `LeadPersonID` int NOT NULL,
+  PRIMARY KEY (`ProgramID`),
+  KEY `GoverningCommittee` (`GoverningCommittee`),
+  KEY `LeadPersonID` (`LeadPersonID`),
+  CONSTRAINT `Program_ibfk_1` FOREIGN KEY (`GoverningCommittee`) REFERENCES `Committee` (`CommitteeID`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `Program_ibfk_2` FOREIGN KEY (`LeadPersonID`) REFERENCES `Person` (`PersonID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -76,4 +143,4 @@ CREATE TABLE `Person` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-19 16:23:18
+-- Dump completed on 2023-10-20 19:30:44
