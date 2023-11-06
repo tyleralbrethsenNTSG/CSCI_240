@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Missoula Ultimate Board of Directors</title>
+   </head>
+   <body>
+      <h1>
+         Missoula Ultimate Board Members
+      </h1>
+      
+        <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Board Position</th>
+        </tr>
+        
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry[0] }}</td>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+            </tr>
+        {% endfor %}
+    </body>
+</html>
