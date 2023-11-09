@@ -11,15 +11,19 @@ form_input = [
     ('Lily', 'Vaughn', 'Vice Prez')
 ]
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET'])
 def index():
-    if request.method == 'POST':
-        print(request.form)
+    first = request.args.get('FirstName')
+    last = request.args.get('LastName')
+    position = request.args.get('BoardPosition')
+
+    if first is not None and last is not None and position is not None:
+        print(request.args)
         form_input.append(
             (
-                request.form.get('First Name'),
-                request.form.get('Last Name'),
-                request.form.get('Board Position')
+                request.args.get('FirstName'),
+                request.args.get('LastName'),
+                request.args.get('BoardPosition')
             )
         )
     return render_template("mu_base.html", navbar=navbar)
