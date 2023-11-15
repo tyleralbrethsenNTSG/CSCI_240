@@ -21,10 +21,10 @@ def showTable():
 
     id = request.args.get('id')
 
-    # Fetch the value from the table with a matching ID
-    sqlstring = """Select * from speaker where id = %s""".format(id)
-    print(sqlstring)
-    mycursor.execute(sqlstring)
+    # Use a parameterized query
+    sqlstring = "select * from speaker where id=%s"
+    mycursor.execute(sqlstring, (id,))
+    
     myresult = mycursor.fetchall()
     mycursor.close()
     connection.close()
