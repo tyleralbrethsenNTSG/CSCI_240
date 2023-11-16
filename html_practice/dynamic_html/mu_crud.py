@@ -10,7 +10,7 @@ with open('/home/tyleralbrethsen/CSCI_240/html_practice/dynamic_html/mu_secrets.
     creds = json.load(secretFile)['mysqlCred']
 
 @app.route('/', methods=['GET'])
-def showSpeakers():
+def showPerson():
     connection = mysql.connector.connect(**creds)
     mycursor = connection.cursor()
 
@@ -31,7 +31,7 @@ def showSpeakers():
     myresult = mycursor.fetchall()
     mycursor.close()
     connection.close()
-    return render_template('mu-member-list.html', collection=myresult)
+    return render_template('mu_person_list.html', collection=myresult)
 
 @app.route("/updatePerson")
 def updatePerson():
@@ -45,18 +45,18 @@ def updatePerson():
         return "Error, id not specified"
     elif first is not None and last is not None and usau is not None:
         mycursor = connection.cursor()
-        mycursor.execute("UPDATE Person set FirstName=%s, LastName=%s, USAU_Number=%s where id=%s", (first, last, usau, id))
+        mycursor.execute("UPDATE Person set FirstName=%s, LastName=%s, USAU_Number=%s where PersonID=%s", (first, last, usau, id))
         mycursor.close()
         connection.commit()
         connection.close()
-        return redirect(url_for('showMembers'))
+        return redirect(url_for('showPerson'))
 
     mycursor = connection.cursor()
-    mycursor.execute("select * from Person where id=%s;", (id,))
+    mycursor.execute("select * from Person where PersonID=%s;", (id,))
     _, existingFirst, existingLast, existingUSAU = mycursor.fetchone()
     mycursor.close()
     connection.close()
-    return render_template('speaker-update.html', id=id, existingFirst=existingFirst, existingLast=existingLast, existingUSAU=existingUSAU)
+    return render_template('mu_person_update.html', id=id, existingFirst=existingFirst, existingLast=existingLast, existingUSAU=existingUSAU)
 
 
 if __name__ == '__main__':
