@@ -1,0 +1,16 @@
+{% extends 'mu_base_crud.html' %}
+
+{% block header %}
+  Updating Missoula Ultimate Committees
+{% endblock %}
+
+{% block content %}
+
+<h2>Enter a new value here</h2>
+<form action="">
+  <input type="hidden" name="CommitteeID" value="{{id}}">
+  Committee Name: <input type="text" name="Name" value="{{existingName}}"><br />
+  <input type="submit" value="Submit">
+</form>
+<a href="/">Return to list</a>
+{% endblock %}
