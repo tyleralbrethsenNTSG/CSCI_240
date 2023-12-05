@@ -2,14 +2,14 @@
 <html>
    <head>
       <link rel="stylesheet" href="{{ url_for('static', filename='mu_style.css') }}">
-      <title>{% block title %}{% endblock %} - Missoula Ultimate</title></head>
+      <title>{% block title %}{% endblock %}</title></head>
    <body>
       <h1>
-         {% block header %}{% endblock %}
+         {% block header %}Missoula Ultimate{% endblock %}
       </h1>
       {% block content %}{% endblock %}
-      <a href="/members"> View Members </a> </br>
-      <a href="/committees"> View Committees </a>
+      <a href="/members"> View All Members </a> </br>
+      <a href="/committees"> View All Committees </a>
 
    </body>
 </html>

@@ -40,7 +40,7 @@ def showPeople():
     
     else:
         mycursor.execute("SELECT PersonID, FirstName, LastName, USAU_Number from Person")
-        pageTitle = "Showing all Missoula Ultimate members"
+        pageTitle = "Missoula Ultimate"
         all_members = mycursor.fetchall()
 
     mycursor.close()
@@ -95,7 +95,7 @@ def showCommittees():
         pageTitle = f"Showing all committees containing {memberFirst} {memberLast}"
     else:
         mycursor.execute("SELECT CommitteeID, Committee.Name from Committee")
-        pageTitle = "Showing all Missoula Ultimate committees"
+        pageTitle = "Missoula Ultimate"
         all_committees = mycursor.fetchall()
 
     mycursor.close()
