@@ -1,0 +1,24 @@
+{% extends 'mu_base_crud.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Members{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>Committee Name</th>
+    <th>Position</th>
+  </tr>
+  {% for row in committeeList %}
+  <tr>
+    <td>
+        {{row[0]}}
+    </td>
+    <td>
+        {{row[1]}}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

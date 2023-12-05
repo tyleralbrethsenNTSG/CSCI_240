@@ -1,0 +1,27 @@
+{% extends 'mu_base_crud.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Programs{% endblock %}
+
+{% block content %}
+
+<h1>
+  Programs
+</h1>
+<table>
+  <tr>
+    <th>Program Name</th>
+    <th>Governing Committee</th>
+  </tr>
+  {% for row in programList %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      <a href="/showCommitteeMembers?CommitteeID={{row[1]}}">{{row[2]}}</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

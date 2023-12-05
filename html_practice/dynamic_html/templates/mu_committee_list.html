@@ -12,6 +12,7 @@
   <tr>
     <th>Committee ID</th>
     <th>Committee Name</th>
+    <th>View Members</th>
   </tr>
   {% for row in committeeList %}
   <tr>
@@ -20,6 +21,9 @@
     </td>
     <td>
       {{row[1]}}
+    </td>
+    <td>
+      <a href="/showCommitteeMembers?CommitteeID={{row[0]}}">Members</a>
     </td>
     <td>
       <a href="?delete=true&CommitteeID={{row[0]}}">Delete</a><br />
